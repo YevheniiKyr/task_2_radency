@@ -1,18 +1,54 @@
 import React, {useState} from 'react';
-import {Category} from "../../types/task";
+import {Category, Task} from "../../types/task";
 import {Dropdown, Form, Modal, Button} from "react-bootstrap";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useActions} from "../../hooks/useActions";
+import {parseDates} from "../../utils/helpers";
+import FillFieldsModal from "./fillFieldsModal";
 
-const CreateNoteModal: React.FC = ({show, onHide}) => {
 
-    const [name, setName] = useState<String>('')
-    const [content, setContent] = useState<String>('')
+type CreateNoteModalProps = {
+    show: boolean;
+    onHide: () => void;
+};
+const CreateNoteModal: React.FC<CreateNoteModalProps> = ({show, onHide}) => {
+
+
+    const [name, setName] = useState<string>('')
+    const [content, setContent] = useState<string>('')
     const [category, setCategory] = useState<Category>('Idea')
+    const categories: Category[] = ["Task", "Random Thought", "Idea"];
+    const [fillFieldsVisible, setFillFieldsVisible] = useState<boolean>(false)
+
+    const {tasks} = useTypedSelector(state => state.task)
+
+    const {addTask} = useActions()
+
+
+    const createNote = () => {
+        if (name.trim() === '' || !category || content.trim() === '') {
+            setFillFieldsVisible(true)
+            return
+        }
+
+        let task:Task = {
+            id: tasks.length+1,
+            createdAt:  new Date(),
+            archived: false,
+            content: content,
+            name: name,
+            category: category,
+            dates: parseDates(content)
+        }
+        addTask(task)
+        onHide()
+    }
 
     return (
-        <Modal show={show} onHide={onHide} centered>
+        <><Modal show={show} onHide={onHide} centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                   Create note
+                    Create note
                 </Modal.Title>
             </Modal.Header>
 
@@ -21,15 +57,13 @@ const CreateNoteModal: React.FC = ({show, onHide}) => {
                     <Dropdown className="mt-2 mb-2">
                         <Dropdown.Toggle>{category || "Оберіть категорію"}</Dropdown.Toggle>
                         <Dropdown.Menu>
-                            {
-                                Category.map(type =>
-                                    <Dropdown.Item
-                                        onClick={() => setSelectedCategory(type)}
-                                        key={type._id}
-                                    >
-                                        {type.name}
-                                    </Dropdown.Item>
-                                )}
+                            {categories.map(category => <Dropdown.Item
+                                    onClick={() => setCategory(category)}
+                                    key={category}
+                                >
+                                    {category}
+                                </Dropdown.Item>
+                            )}
                         </Dropdown.Menu>
                     </Dropdown>
 
@@ -37,38 +71,24 @@ const CreateNoteModal: React.FC = ({show, onHide}) => {
                         value={name}
                         onChange={e => setName(e.target.value)}
                         className="mt-2"
-                        placeholder="Введіть назву товару"
-                    />
+                        placeholder="Enter name here"/>
                     <Form.Control
-                        value={price}
-                        onChange={e => setPrice(Number(e.target.value))}
+                        value={content}
+                        onChange={e => setContent(e.target.value)}
                         className="mt-2"
-                        placeholder="Введіть ціну товару"
-                        type="number"
-                    />
-                    <Form.Control
-                        value={desc}
-                        onChange={e => setDesc(e.target.value)}
-                        className="mt-2"
-                        placeholder="Введіть опис товару"
-                    />
-
-
-                    <Form.Control
-                        className="mt-3"
-                        type="file"
-                        onChange={selectFile}
-                    />
-                    <hr/>
+                        placeholder="Enter text here"/>
 
 
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="outline-danger" onClick={onHide}>Закрити</Button>
-                <Button variant="outline-success" onClick={addProduct}>Додати</Button>
+                <Button variant="outline-danger" onClick={onHide}>Cancel</Button>
+                <Button variant="outline-success" onClick={createNote}>Create</Button>
             </Modal.Footer>
         </Modal>
+            <FillFieldsModal show={fillFieldsVisible} onHide={() => setFillFieldsVisible(false)}/>
+            </>
+
 );
 };
 

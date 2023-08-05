@@ -5,7 +5,7 @@ export type Task = {
     category: Category,
     content: string,
     //типізувати дату виразом регекс
-    dates: [string],
+    dates: RegExpMatchArray | never[],
     archived: boolean
 
 }
@@ -14,8 +14,7 @@ export type Category = "Task" | "Random Thought" | "Idea"
 
 export interface TaskState {
     tasks: Task[],
-    loading: boolean,
-    error: null | string
+
 }
 
 interface FetchTasksAction {
@@ -34,28 +33,36 @@ interface ArchiveTaskAction {
     payload: number
 }
 
-
-interface FetchTasksSuccessAction {
-    type: TaskActionTypes.FETCH_TASKS_SUCCESS
-    payload: Task[]
+interface UnarchiveTaskAction {
+    type: TaskActionTypes.UNARCHIVE_TASK
+    payload: number
 }
 
-interface FetchTasksErrorAction {
-    type: TaskActionTypes.FETCH_TASKS_ERROR
-    payload: string
+interface CreateTaskAction {
+    type: TaskActionTypes.CREATE_TASK
+    payload: Task
 }
+
+interface EditTaskAction {
+    type: TaskActionTypes.EDIT_TASK
+    payload: Task
+}
+
 
 export enum TaskActionTypes {
     FETCH_TASKS = "FETCH_TASKS",
-    FETCH_TASKS_SUCCESS = "FETCH_TASKS_SUCCESS",
-    FETCH_TASKS_ERROR = "FETCH_TASKS_ERROR",
+
     DELETE_TASK = "DELETE_TASK",
-    ARCHIVE_TASK = "ARCHIVATE_TASK"
+    ARCHIVE_TASK = "ARCHIVATE_TASK",
+    CREATE_TASK = "CREATE_TASK",
+    EDIT_TASK = "EDIT_TASK",
+    UNARCHIVE_TASK = "UNARCHIVE_TASK"
 }
 
 export type TaskAction =
     FetchTasksAction |
-    FetchTasksErrorAction |
-    FetchTasksSuccessAction |
     DeleteTaskAction |
-    ArchiveTaskAction
+    ArchiveTaskAction |
+    CreateTaskAction |
+    EditTaskAction |
+    UnarchiveTaskAction

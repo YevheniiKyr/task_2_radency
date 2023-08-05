@@ -25,15 +25,19 @@
     display: flex;
 }
 
-/*#editForm div*/
 
 #createNoteButton {
     margin-right: 1rem;
+
 }
 
 #openCreateWindow {
     float: right;
+    padding: 2px;
+    margin-top: 0.5rem;
 }
+
+
 h1, h2 {
     color: darkblue;
     text-align: center;
@@ -70,9 +74,9 @@ th {
 #openArchive, #closeArchive {
     margin-top: 1rem;
     width: 5rem;
-    height: 3rem;
+    height: 4rem;
     text-align: center;
-    padding: 0.1rem
+    padding: 1px
 
 }
 
@@ -121,3 +125,6 @@ th {
 
 }
 
+#archive {
+    margin-top: 2rem;
+}
