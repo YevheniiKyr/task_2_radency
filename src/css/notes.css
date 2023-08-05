@@ -48,11 +48,12 @@ table tr button {
     margin-right: 0.2rem;
 }
 
-table {
+.myTable {
     border-spacing: 0 10px;
     background-color: rgb(255, 255, 255);
     width: 100%;
     table-layout: fixed;
+    border-collapse: unset;
 }
 
 tr {
@@ -127,4 +128,9 @@ th {
 
 #archive {
     margin-top: 2rem;
+}
+/* Custom CSS for the background modal (backdrop) */
+.my-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* Replace with your desired color */
+    z-index: 1050;
 }

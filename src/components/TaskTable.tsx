@@ -32,7 +32,7 @@ const TaskTable: React.FC = () => {
 
     return (
         <div>
-            <table id="tableNotes">
+            <table id="tableNotes"  className={ "myTable" }>
                 <thead>
                 <tr>
                     <th style={{display: "none"}}>ID</th>

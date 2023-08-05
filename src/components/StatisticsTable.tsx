@@ -53,7 +53,7 @@ const StatisticsTable: React.FC = () => {
     return (
         <div id="stats">
             <h2>Stats</h2>
-            <table id="statsTable">
+            <table id="statsTable"  className={ "myTable" }>
                 <thead>
                 <tr>
                     <th>Note category</th>
