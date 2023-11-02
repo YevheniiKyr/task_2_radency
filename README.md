@@ -1,46 +1,55 @@
-# Getting Started with Create React App
+# Task 
+Task is to create a notes app in JS as a web app.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Users can add, edit and remove notes.
 
-## Available Scripts
+List of notes is displayed in a form of table (HTML representation may vary: table, divs etc).
 
-In the project directory, you can run:
+The columns are name, time of creation, note content, note category, etc.
 
-### `npm start`
+Categories are predefined: “Task”, “Random Thought”, “Idea”.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Notes in the table should also display a list of dates mentioned in this note as a separate column. For example, for a note “I’m gonna have a dentist appointment on the 3/5/2021, I moved it from 5/5/2021” the dates column is “3/5/2021, 5/5/2021”.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Users can archive notes. Archived notes are not shown in the notes list. Users can view archived notes and unarchive them.
 
-### `npm test`
+There should also be a summary table which counts notes by categories: separately for active and archived. The table is updated whenever users perform some action on notes. The summary table is shown on the same page as the notes table.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+There is no need to implement data storage. Simply create a JS variable which stores the data and prepopulate it with 7 notes so that they are shown when the page is reloaded
 
-### `npm run build`
+## Technologies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React
+ 
+- Typescript
+  
+- Redux (state manager)
+  
+## How to run app
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Go to project directory and run scripts 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- npm install
 
-### `npm run eject`
+- npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Demonstartion
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Page
+![image](https://github.com/YevheniiKyr/task_1_radency/assets/84139553/7e5b1791-5524-4414-a7e0-51cefd7ec16c)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Archieve 
+![image](https://github.com/YevheniiKyr/task_1_radency/assets/84139553/9eefa711-5d89-4da4-88eb-4ec4fce104ae)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Create note modal
+![image](https://github.com/YevheniiKyr/task_1_radency/assets/84139553/a441c3bc-4e82-4bbf-b54a-5ebca42c0524)
 
-## Learn More
+Edit note modal
+![image](https://github.com/YevheniiKyr/task_1_radency/assets/84139553/52ed1a61-6fdc-4775-ba84-c6d0318c255d)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Acquired knowledge
+- Redux : action-creators and reducers in app.
+- Typescript : typing React app, typed selectors
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  
+
